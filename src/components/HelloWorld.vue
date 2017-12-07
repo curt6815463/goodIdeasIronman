@@ -30,6 +30,9 @@
                   <th scope="row">{{postIndex}}</th>
                   <td>{{post.title}}</td>
                   <td>{{post.date}}</td>
+                  <div v-if="isHot(post)" class="fire">
+                    <img src="~@/assets/fire.jpg" alt="">
+                  </div>
                 </tr>
               </tbody>
             </table>
@@ -105,7 +108,22 @@ export default {
   background-color: #eee;
 }
 .fuck{
+  position: relative;
   cursor: pointer;
+}
+.fire{
+  position: relative;
+  /*margin: auto;
+  top:0px;
+  bottom: 0px;*/
+  /*right: 0px;*/
+}
+.fire img{
+  position: absolute;
+  top:9px;
+  right:20px;
+  margin: auto;
+  width: 30px;
 }
 /*.trList{
   color: red;
