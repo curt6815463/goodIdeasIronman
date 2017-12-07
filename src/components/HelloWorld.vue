@@ -7,6 +7,9 @@
             <a data-toggle="collapse" :href="'#collapse' + index" aria-expanded="true" :aria-controls="'collapse' + index">
               {{member.name}}
             </a>
+            <div class="">
+              篇數：{{member.postList.length}}
+            </div>
           </h5>
         </div>
 
@@ -21,7 +24,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr @click="direct(post)" v-for='(post,postIndex) in member.postList'>
+                <tr class="fuck" :class="{isHot:isHot(post)}" @click="direct(post)" v-for='(post,postIndex) in member.postList'>
                   <th scope="row">{{postIndex}}</th>
                   <td>{{post.title}}</td>
                   <td>{{post.date}}</td>
@@ -62,6 +65,17 @@ export default {
         this.members = response
         console.log('com');
       });
+    },
+    isHot(post){
+      let date = new Date(post.date)
+      let now = Date.now()
+      let subtract = now - date
+      if(subtract/1000/60/60 < 48){
+        return true
+      }
+      else {
+        return false
+      }
     }
   },
   created(){
@@ -72,5 +86,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.isHot{
+  color: red;
+}
+.fuck:hover {
+  /*color:blue;*/
+  background-color: #eee;
+}
+/*.trList{
+  color: red;
+}*/
 </style>
