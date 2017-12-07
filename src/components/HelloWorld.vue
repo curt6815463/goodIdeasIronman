@@ -3,13 +3,15 @@
     <div id="accordion" role="tablist">
       <div v-for="(member,index) in members" class="card">
         <div class="card-header" role="tab" id="headingOne">
-          <h5 class="mb-0">
-            <a data-toggle="collapse" :href="'#collapse' + index" aria-expanded="true" :aria-controls="'collapse' + index">
+          <h5 :href="'#collapse' + index"class="mb-0">
+            <a class="cr_collapse_href" data-toggle="collapse" :href="'#collapse' + index" aria-expanded="true" :aria-controls="'collapse' + index">
               {{member.name}}
+              <br>
+              <div class="listLength">
+                篇數：{{member.postList.length}}
+              </div>
             </a>
-            <div class="">
-              篇數：{{member.postList.length}}
-            </div>
+
           </h5>
         </div>
 
@@ -38,6 +40,7 @@
 
 
     </div>
+
   </div>
 </template>
 
@@ -51,11 +54,10 @@ export default {
   },
   methods:{
     direct(post){
-      window.location.href = post.url
+      window.open(post.url)
       console.log(post);
     },
     getInfomation(){
-      console.log('test');
       var settings = {
         "url": "https://lit-journey-88022.herokuapp.com/",
         "method": "GET",
@@ -63,7 +65,6 @@ export default {
 
       $.ajax(settings).done((response) => {
         this.members = response
-        console.log('com');
       });
     },
     isHot(post){
@@ -86,12 +87,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.listLength{
+  color: #000;
+}
+.cr_collapse_href{
+  text-decoration: none;
+  display: block;
+  /*color: #000;*/
+  /*margin-top:30px;*/
+}
 .isHot{
   color: red;
 }
 .fuck:hover {
+  /*cursor: helper;*/
   /*color:blue;*/
   background-color: #eee;
+}
+.fuck{
+  cursor: pointer;
 }
 /*.trList{
   color: red;
